@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 produce_output.py $*
+python3 text_accuracy.py $*

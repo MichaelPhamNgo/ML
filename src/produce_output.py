@@ -22,6 +22,7 @@ if INPUT_PARAMETER != "-i" \
 PROFILE_CSV = "{}/{}".format(INPUT_PATH, "profile/profile.csv")
 PROFILE_DF = pandas.read_csv(PROFILE_CSV)
 
+
 for i in range(0, PROFILE_DF.shape[0]):
     USER_ID = PROFILE_DF.loc[i, 'userid'];
     xml = "<user \n" \

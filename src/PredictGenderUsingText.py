@@ -9,38 +9,38 @@ from sklearn.metrics import confusion_matrix
 
 # Input Parameter e.g. '-i'
 INPUT_PARAMETER = str(sys.argv[1])
-
-# Input directory path
+#
+# # Input directory path
 INPUT_PATH = str(sys.argv[2])
-
-# Output parameter e.g. -o
+#
+# # Output parameter e.g. -o
 OUTPUT_PARAMETER = str(sys.argv[3])
-
-# Output directory path
+#
+# # Output directory path
 OUTPUT_PATH = str(sys.argv[4])
-
-# Checks if flags were set correctly
+#
+# # Checks if flags were set correctly
 if INPUT_PARAMETER != "-i" \
         or OUTPUT_PARAMETER != "-o":
     sys.exit()
 
 # The training directory which containing the profile.csv
-profile_training_csv = "{}/{}".format(INPUT_PATH, "../training/profile/profile.csv")
+profile_training_csv = ("C:/Users/micha/PycharmProjects/ML/data/training/profile/profile.csv")
 profile_training_df = pd.read_csv(profile_training_csv)
 
 # Read the file name without extension and its content (or transcripts)
 # and put into an array
 data_training = []
-with os.scandir(INPUT_PATH + "../training/text/") as entries:
+with os.scandir("C:/Users/micha/PycharmProjects/ML/data/training/text/") as entries:
     for entry in entries:
         # os.path.splitext(entry.name)[0] : filename without extension
         # open(INPUT_PATH + "/text/" + entry.name, "r").read(): read content of the file respective
         data = [os.path.splitext(entry.name)[0],
-                open(INPUT_PATH + "../training/text/" + entry.name, "r").read()]
+                open("C:/Users/micha/PycharmProjects/ML/data/training/text/" + entry.name, "r").read()]
         data_training.append(data)
 
 data_testing = []
-with os.scandir(INPUT_PATH + "/text/") as entries:
+with os.scandir("C:/Users/micha/PycharmProjects/ML/data/public-test-data/text/") as entries:
     for entry in entries:
         # os.path.splitext(entry.name)[0] : filename without extension
         # open(INPUT_PATH + "/text/" + entry.name, "r").read(): read content of the file respective
@@ -100,8 +100,15 @@ for i in userIds:
             "conscientious=\"-""\"\n" \
             "open=\"-""\"\n" \
             "/>"
-    filename = "{}/{}.xml".format(OUTPUT_PATH, i)
+    filename = "{}/{}.xml".format("C:/Users/micha/PycharmProjects/ML/output/", i)
     with open(filename, 'w') as f:
         f.write(xml)
     f.close()
     j = j + 1
+
+import pickle
+# save the model to disk
+filename = 'countVect_model.sav'
+pickle.dump(clf, open("some_model.sav", "wb"))
+filename1 = 'countVect_model.sav'
+pickle.dump(count_vect, open(filename1, "wb"))
